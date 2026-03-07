@@ -26,8 +26,8 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
     final pages = [
       const HomePage(),
       const ProductCatagoryPage(),
-      const _SimplePage(text: 'Cart page is your friend\'s part'),
-      const _SimplePage(text: 'Profile page is your friend\'s part'),
+      const _SimplePage(text: 'tahmid and waseq part'),
+      const _SimplePage(text: 'tahmid and waseq part'),
     ];
 
     return Scaffold(
