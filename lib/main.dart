@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/splash_screen.dart';
-
-import 'navigation.dart';
+import 'hasnine/navigation.dart';
+import 'hasnine/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,12 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Shop Demo',
+      title: 'CartX',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }
