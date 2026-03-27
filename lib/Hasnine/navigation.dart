@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../Waseq/cart_page.dart';
 import 'home_page.dart';
 import 'product_catagory.dart';
+
 
 const List<IconData> navIcons = [
   Icons.home_outlined,
@@ -33,20 +35,11 @@ class MainNavigationPage extends StatelessWidget {
     }
 
     if (initialIndex == 2) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('Hasnine')),
-        body: const Center(
-          child: Text(
-            'Cart Page',
-            style: TextStyle(fontSize: 22),
-          ),
-        ),
-        bottomNavigationBar: const CustomNavBar(selectedIndex: 2),
-      );
+      return const CartPage();
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Hasnine')),
+      appBar: AppBar(title: const Text('Profile')),
       body: const Center(
         child: Text(
           'Profile Page',

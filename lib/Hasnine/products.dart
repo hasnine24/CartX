@@ -20,9 +20,11 @@ class Product {
   });
 }
 
-Widget productPhotoOrIcon(Product product, {double iconSize = 32}) {
+Widget productPhotoOrIcon(Product product, {double? iconSize}) {
   return Image.asset(
     product.imageAsset,
+    height: iconSize,
+    width: iconSize,
     fit: BoxFit.contain,
   );
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'hasnine/navigation.dart';
-import 'hasnine/splash_screen.dart';
+import 'Hasnine/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

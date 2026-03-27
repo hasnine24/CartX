@@ -148,7 +148,7 @@ class HomePage extends StatelessWidget {
                             height: 115,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: product.color.withOpacity(0),
+                              color: product.color.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: ClipRRect(
@@ -176,7 +176,7 @@ class HomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            '\৳${product.price.toStringAsFixed(2)}',
+                            '৳${product.price.toStringAsFixed(2)}',
                             style: const TextStyle(
                               color: Color(0xFFEF5350),
                               fontWeight: FontWeight.bold,

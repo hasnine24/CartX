@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../Waseq/cart_manager.dart';
 import 'navigation.dart';
 import 'products.dart';
+
 
 class ProductListPage extends StatelessWidget {
   final String title;
@@ -41,12 +43,12 @@ class ProductListPage extends StatelessWidget {
           return Card(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: product.color.withOpacity(0.2),
+                backgroundColor: product.color.withValues(alpha: 0.2),
                 child: productPhotoOrIcon(product, iconSize: 20),
               ),
               title: Text(product.name),
               subtitle: Text(product.category),
-              trailing: Text('\৳${product.price.toStringAsFixed(2)}'),
+              trailing: Text('৳${product.price.toStringAsFixed(2)}'),
               onTap: () {
                 Navigator.push(
                   context,
@@ -100,7 +102,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
           Container(
             height: 200,
             decoration: BoxDecoration(
-              color: widget.product.color.withOpacity(0),
+              color: widget.product.color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16),
             ),
             child: productPhotoOrIcon(widget.product, iconSize: 90),
@@ -117,7 +119,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
           Text(widget.product.category),
           const SizedBox(height: 6),
           Text(
-            '\৳${widget.product.price.toStringAsFixed(2)}',
+            '৳${widget.product.price.toStringAsFixed(2)}',
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -151,17 +153,38 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
           ),
           const SizedBox(height: 10),
           Text(
-            'Total: \৳${total.toStringAsFixed(2)}',
+            'Total: ৳${total.toStringAsFixed(2)}',
             style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF5FA4AE),
+              foregroundColor: Colors.white,
+            ),
             onPressed: () {
+              // 1. Check if item is already in cart
+              bool itemExists = false;
+              for (var item in globalCart) {
+                if (item.product.id == widget.product.id) {
+                  item.quantity += quantity; // Update quantity
+                  itemExists = true;
+                  break;
+                }
+              }
+
+              // 2. If not, add new CartItem
+              if (!itemExists) {
+                globalCart.add(CartItem(product: widget.product, quantity: quantity));
+              }
+
+              // 3. Show Success SnackBar
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('${widget.product.name} x$quantity added to cart'),
+                  behavior: SnackBarBehavior.floating,
                 ),
               );
             },
