@@ -11,38 +11,38 @@ class ProductCatagoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<String> categoryNames = [
       'Food',
-      'Pet Care',
       'Clothing',
       'Electronics',
       'Accessories',
-      'Toys & Sports',
+      'Sports',
+      'Beauty'
     ];
 
     final List<IconData> categoryIcons = [
       Icons.restaurant,
-      Icons.pets,
       Icons.checkroom_outlined,
       Icons.smartphone,
       Icons.auto_awesome_outlined,
       Icons.sports_cricket_outlined,
+      Icons.brush,
     ];
 
     final List<Color> iconColors = [
       const Color(0xFFE67E22),
-      const Color(0xFF2D98DA),
       const Color(0xFF6AB04C),
       const Color(0xFF8E44AD),
       const Color(0xFFEB4D4B),
       const Color(0xFF2D98DA),
+      const Color(0xFF8E44AD),
     ];
 
     final List<Color> backgroundColors = [
       const Color(0xFFFFF1E8),
-      const Color(0xFFEAF4FF),
       const Color(0xFFEEF8E8),
       const Color(0xFFF4EAFA),
       const Color(0xFFFFEEEE),
       const Color(0xFFFFEEEE),
+      const Color(0xFFEEF8E8),
     ];
 
     return Scaffold(

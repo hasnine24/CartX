@@ -74,32 +74,6 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: const Color(0xFF5FA4AE),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Special Offer',
-                    style: TextStyle(color: Colors.white70, fontSize: 12),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    'Up to 40% OFF',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
             const Text(
               'Popular Items',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -148,7 +122,6 @@ class HomePage extends StatelessWidget {
                             height: 115,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: product.color.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: ClipRRect(
@@ -176,7 +149,7 @@ class HomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            '৳${product.price.toStringAsFixed(2)}',
+                            '\৳${product.price.toStringAsFixed(2)}',
                             style: const TextStyle(
                               color: Color(0xFFEF5350),
                               fontWeight: FontWeight.bold,
@@ -196,7 +169,7 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-//profile box on appbar
+
 class _ProfileBox extends StatelessWidget {
   const _ProfileBox();
 

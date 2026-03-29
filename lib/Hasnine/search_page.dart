@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'product_description.dart';
 import 'navigation.dart';
 import 'products.dart';
-import 'product_description.dart';
 
 class SearchPage extends StatefulWidget {
   final int navIndex;
@@ -24,14 +23,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void searchProduct(String text) {
-    if (text.isEmpty) {
-      setState(() {
-        searchResults = [];
-      });
-      return;
-    }
-
     final List<Product> results = [];
+
     for (final product in demoProducts) {
       if (product.name.toLowerCase().contains(text.toLowerCase())) {
         results.add(product);
@@ -79,21 +72,19 @@ class _SearchPageState extends State<SearchPage> {
 
                   return Card(
                     child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: product.color.withValues(alpha: 0.1),
-                        child: productPhotoOrIcon(product, iconSize: 20),
-                      ),
                       title: Text(product.name),
                       subtitle: Text(product.category),
-                      trailing: Text('৳${product.price.toStringAsFixed(2)}'),
+                      trailing: Text('\$${product.price.toStringAsFixed(2)}'),
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => ProductDescriptionPage(
-                              product: product,
-                              navIndex: widget.navIndex,
-                            ),
+                            builder: (context) {
+                              return ProductDescriptionPage(
+                                product: product,
+                                navIndex: widget.navIndex,
+                              );
+                            },
                           ),
                         );
                       },
