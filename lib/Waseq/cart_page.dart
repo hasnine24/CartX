@@ -63,7 +63,6 @@ class _CartPageState extends State<CartPage> {
                   height: 70,
                   width: 70,
                   decoration: BoxDecoration(
-                    color: item.product.color.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Image.asset(item.product.imageAsset),

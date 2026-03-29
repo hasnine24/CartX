@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'navigation.dart';
 import 'products.dart';
+import '../Waseq/cart_manager.dart';
 
 class ProductListPage extends StatelessWidget {
   final String title;
@@ -87,6 +88,23 @@ class ProductDescriptionPage extends StatefulWidget {
 class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
   int quantity = 1;
 
+  void _addToCart() {
+    final existingIndex = globalCart.indexWhere(
+      (item) => item.product.name == widget.product.name,
+    );
+
+    if (existingIndex >= 0) {
+      globalCart[existingIndex].quantity += quantity;
+    } else {
+      globalCart.add(
+        CartItem(
+          product: widget.product,
+          quantity: quantity,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double total = widget.product.price * quantity;
@@ -159,6 +177,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
+              _addToCart();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('${widget.product.name} x$quantity added to cart'),
