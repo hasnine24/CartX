@@ -34,7 +34,7 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("My Profile", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        backgroundColor: navyBlue,
+        backgroundColor: brandOrange,
         elevation: 0,
         centerTitle: true,
       ),
@@ -44,7 +44,7 @@ class ProfilePage extends StatelessWidget {
             // --- Top Section: Profile Header ---
             Container(
               width: double.infinity,
-              color: navyBlue,
+              color: brandOrange,
               padding: const EdgeInsets.symmetric(vertical: 30),
               child: StreamBuilder<DocumentSnapshot>(
                 stream: FirebaseFirestore.instance.collection('users').doc(user?.uid).snapshots(),

@@ -50,7 +50,7 @@ class ProductListPage extends StatelessWidget {
               ),
               title: Text(product.name),
               subtitle: Text(product.category),
-              trailing: Text('\৳${product.price.toStringAsFixed(2)}'),
+              trailing: Text('৳${product.price.toStringAsFixed(2)}'),
               onTap: () {
                 Navigator.push(
                   context,
@@ -160,7 +160,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
           Text(widget.product.category),
           const SizedBox(height: 6),
           Text(
-            '\৳${widget.product.price.toStringAsFixed(2)}',
+            '৳${widget.product.price.toStringAsFixed(2)}',
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -194,7 +194,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
           ),
           const SizedBox(height: 10),
           Text(
-            'Total: \৳${total.toStringAsFixed(2)}',
+            'Total: ৳${total.toStringAsFixed(2)}',
             style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),

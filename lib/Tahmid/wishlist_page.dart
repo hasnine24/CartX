@@ -14,8 +14,8 @@ class WishlistPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        title: const Text("My Wishlist", style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color(0xFF2A324B),
+        title: const Text("My Wishlist", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: const Color(0xFFFF7A00),
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: StreamBuilder<QuerySnapshot>(

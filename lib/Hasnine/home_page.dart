@@ -30,8 +30,8 @@ class HomePage extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  _ProfileBox(),
-                  SizedBox(width: 12),
+                  const _ProfileBox(),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: StreamBuilder<DocumentSnapshot>(
                       stream: FirebaseFirestore.instance
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                         }
 
                         return Text(
-                          '$nameToShow',
+                          nameToShow,
                           style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -69,7 +69,7 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) {
-                        return SearchPage(navIndex: 0,);
+                        return const SearchPage(navIndex: 0,);
                       }
                   ),
                 );

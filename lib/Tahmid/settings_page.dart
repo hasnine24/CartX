@@ -17,7 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
         title: const Text("Settings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        backgroundColor: const Color(0xFF2A324B),
+        backgroundColor: brandOrange,
         iconTheme: const IconThemeData(color: Colors.white),
         centerTitle: true,
       ),
