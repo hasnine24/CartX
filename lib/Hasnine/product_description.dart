@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'navigation.dart';
 import 'products.dart';
 import '../Waseq/cart_manager.dart';
@@ -112,6 +114,29 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Details'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite_border, color: Colors.red),
+            onPressed: () async {
+              final user = FirebaseAuth.instance.currentUser;
+              if (user != null) {
+                await FirebaseFirestore.instance
+                    .collection('wishlist')
+                    .doc(user.uid)
+                    .collection('my_items')
+                    .doc(widget.product.id.toString())
+                    .set({
+                  'id': widget.product.id,
+                  'name': widget.product.name,
+                  'price': widget.product.price,
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("${widget.product.name} added to Wishlist!")),
+                );
+              }
+            },
+          ),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
