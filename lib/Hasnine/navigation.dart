@@ -37,17 +37,10 @@ class MainNavigationPage extends StatelessWidget {
     if (initialIndex == 2) {
       return const CartPage();
     }
-
-    return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
-      body: const Center(
-        child: Text(
-          'Profile Page',
-          style: TextStyle(fontSize: 22),
-        ),
-      ),
-      bottomNavigationBar: const CustomNavBar(selectedIndex: 3),
-    );
+    // if (initialIndex == 3) {
+    //   return const ProfilePage();
+    // }
+    return const HomePage();
   }
 }
 

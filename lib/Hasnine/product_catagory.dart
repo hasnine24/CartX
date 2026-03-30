@@ -46,11 +46,14 @@ class ProductCatagoryPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Product Category')),
+      appBar: AppBar(
+        title: const Text('Product Category'),
+        centerTitle: true,
+      ),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: categoryNames.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 10),
+        separatorBuilder: (context, index) => const SizedBox(height: 10),
         itemBuilder: (context, index) {
           String categoryName = categoryNames[index];
           int itemCount = 0;
@@ -62,7 +65,6 @@ class ProductCatagoryPage extends StatelessWidget {
           }
 
           return Card(
-            elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
               side: const BorderSide(color: Color(0xFFE8E8E8)),

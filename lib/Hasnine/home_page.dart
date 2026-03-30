@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F7F7),
+      backgroundColor: Colors.grey.shade200,
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16),
@@ -23,9 +23,7 @@ class HomePage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x14000000),
-                    blurRadius: 12,
-                    offset: Offset(0, 4),
+                    color: Colors.grey,
                   ),
                 ],
               ),
@@ -53,7 +51,9 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const SearchPage(navIndex: 0),
+                      builder: (context) {
+                        return SearchPage(navIndex: 0,);
+                      }
                   ),
                 );
               },
@@ -61,18 +61,24 @@ class HomePage extends StatelessWidget {
                 height: 50,
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Row(
                   children: [
                     Icon(Icons.search),
                     SizedBox(width: 8),
-                    Text('Search products...'),
+                    Text(
+                      'Search Product...',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black, fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ],
                 ),
+                ),
               ),
-            ),
             const SizedBox(height: 16),
             const Text(
               'Popular Items',
@@ -149,7 +155,7 @@ class HomePage extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           Text(
-                            '\৳${product.price.toStringAsFixed(2)}',
+                            '৳${product.price}',
                             style: const TextStyle(
                               color: Color(0xFFEF5350),
                               fontWeight: FontWeight.bold,
@@ -179,7 +185,7 @@ class _ProfileBox extends StatelessWidget {
       width: 42,
       height: 42,
       decoration: BoxDecoration(
-        color: const Color(0xFFE8F3F4),
+        color: Colors.grey,
         borderRadius: BorderRadius.circular(12),
       ),
       child: const Icon(
