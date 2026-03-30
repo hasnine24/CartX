@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'cart_manager.dart';
 import '/Hasnine/navigation.dart';
 
@@ -14,10 +16,23 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   String selectedPaymentMethod = 'Cash on Delivery';
 
-  void _placeOrder() {
-    // Clear the cart on successful order
-    globalCart.clear();
+  void _placeOrder() async {
+    final String userId = FirebaseAuth.instance.currentUser?.uid ?? "unknown";
 
+    String cartSummary = globalCart.isNotEmpty 
+        ? "${globalCart.length} Items Ordered" 
+        : "Order Details";
+
+    // Firestore
+    await FirebaseFirestore.instance.collection('orders').add({
+      'buyerId': userId,
+      'amount': widget.totalAmount,
+      'orderDate': DateTime.now(),
+      'itemSummary': cartSummary,
+    });
+
+    globalCart.clear();
+    if (mounted) {
     showDialog(
       context: context,
       barrierDismissible: false,
