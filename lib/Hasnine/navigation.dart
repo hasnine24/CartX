@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../Tahmid/profile_page.dart';
 import '../Waseq/cart_page.dart';
 import 'home_page.dart';
 import 'product_catagory.dart';
@@ -37,9 +37,20 @@ class MainNavigationPage extends StatelessWidget {
     if (initialIndex == 2) {
       return const CartPage();
     }
-    // if (initialIndex == 3) {
-    //   return const ProfilePage();
-    // }
+    if (initialIndex == 3) {
+       return const ProfilePage();
+    }
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Profile')),
+      body: const Center(
+        child: Text(
+          'Profile Page',
+          style: TextStyle(fontSize: 22),
+        ),
+      ),
+      bottomNavigationBar: const CustomNavBar(selectedIndex: 3),
+    );
     return const HomePage();
   }
 }
