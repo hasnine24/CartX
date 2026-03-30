@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'navigation.dart';
 import 'product_description.dart';
 import 'products.dart';
@@ -32,12 +33,26 @@ class HomePage extends StatelessWidget {
                   _ProfileBox(),
                   SizedBox(width: 12),
                   Expanded(
-                    child: Text(
-                      'Thamid Hasnine',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                    child: StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(FirebaseAuth.instance.currentUser?.uid)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        String nameToShow = "Guest";
+
+                        if (snapshot.hasData && snapshot.data!.exists) {
+                          var userData =
+                              snapshot.data!.data() as Map<String, dynamic>;
+                          nameToShow = userData['name'] ?? "Guest";
+                        }
+
+                        return Text(
+                          '$nameToShow',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
