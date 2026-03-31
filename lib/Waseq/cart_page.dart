@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'cart_manager.dart';
 import 'checkout_page.dart';
-import '/Hasnine/navigation.dart';
+import '../Hasnine/navigation.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});

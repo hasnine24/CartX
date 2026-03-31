@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Row(
+              child: Row(
                 children: [
                   _ProfileBox(),
                   SizedBox(width: 12),
@@ -54,6 +54,8 @@ class HomePage extends StatelessWidget {
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                       ),
+                    );
+                      },
                     ),
                   ),
                 ],

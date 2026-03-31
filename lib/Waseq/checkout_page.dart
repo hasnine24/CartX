@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'cart_manager.dart';
-import '/Hasnine/navigation.dart';
+import '../Hasnine/navigation.dart';
 
 class CheckoutPage extends StatefulWidget {
   final double totalAmount;
@@ -19,8 +19,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
   void _placeOrder() async {
     final String userId = FirebaseAuth.instance.currentUser?.uid ?? "unknown";
 
-    String cartSummary = globalCart.isNotEmpty 
-        ? "${globalCart.length} Items Ordered" 
+    String cartSummary = globalCart.isNotEmpty
+        ? "${globalCart.length} Items Ordered"
         : "Order Details";
 
     // Firestore
@@ -33,42 +33,45 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     globalCart.clear();
     if (mounted) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Icon(Icons.check_circle, color: Colors.green, size: 60),
-        content: const Text(
-          'Order Placed Successfully!',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        actions: [
-          Center(
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF5FA4AE),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              onPressed: () {
-                // Navigate back to the Home page
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const MainNavigationPage(initialIndex: 0),
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          title: const Icon(Icons.check_circle, color: Colors.green, size: 60),
+          content: const Text(
+            'Order Placed Successfully!',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          actions: [
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF5FA4AE),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                      (route) => false,
-                );
-              },
-              child: const Text('Back to Home', style: TextStyle(color: Colors.white)),
-            ),
-          )
-        ],
-      ),
-    );
+                ),
+                onPressed: () {
+                  // Navigate back to the Home page
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const MainNavigationPage(initialIndex: 0),
+                    ),
+                    (route) => false,
+                  );
+                },
+                child: const Text('Back to Home',
+                    style: TextStyle(color: Colors.white)),
+              ),
+            )
+          ],
+        ),
+      );
+    }
   }
 
   @override
