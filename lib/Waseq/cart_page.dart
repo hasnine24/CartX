@@ -27,8 +27,10 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       backgroundColor: const Color(0xFFF7F7F7),
       appBar: AppBar(
-        title: const Text('My Cart'),
-        backgroundColor: Colors.white,
+        title: const Text('My Cart', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: const Color(0xFFFF7A00),
+        iconTheme: const IconThemeData(color: Colors.white),
+        centerTitle: true,
         elevation: 0,
       ),
       body: globalCart.isEmpty
@@ -103,9 +105,11 @@ class _CartPageState extends State<CartPage> {
           );
         },
       ),
-      bottomNavigationBar: globalCart.isEmpty
-          ? const CustomNavBar(selectedIndex: 2)
-          : Container(
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if(globalCart.isNotEmpty)
+          Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -114,9 +118,7 @@ class _CartPageState extends State<CartPage> {
             BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, -2))
           ],
         ),
-        child: SafeArea(
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +143,7 @@ class _CartPageState extends State<CartPage> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF5FA4AE),
+                    backgroundColor: const Color(0xFFFF7A00),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -163,6 +165,8 @@ class _CartPageState extends State<CartPage> {
             ],
           ),
         ),
+      const CustomNavBar(selectedIndex: 2),
+        ],
       ),
     );
   }
