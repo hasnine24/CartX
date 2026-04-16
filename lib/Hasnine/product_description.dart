@@ -27,23 +27,49 @@ class ProductListPage extends StatelessWidget {
             .toList();
 
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      backgroundColor: const Color(0xFFF7F7F7),
+      appBar: AppBar(
+        title: Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: const Color(0xFFFF7A00),
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.white),
+        elevation: 0,
+      ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: products.length,
         itemBuilder: (context, index) {
           final product = products[index];
 
-          return Card(
+          return Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                )
+              ],
+            ),
             child: ListTile(
-              leading: SizedBox(
-                width: 70,
-                height: 70,
-                child: productPhotoOrIcon(product, iconSize: 70),
+              contentPadding: const EdgeInsets.all(12),
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: productPhotoOrIcon(product, iconSize: 60),
+                ),
               ),
-              title: Text(product.name),
-              subtitle: Text(product.category),
-              trailing: Text('৳${product.price.toStringAsFixed(2)}'),
+              title: Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              subtitle: Text(product.category, style: TextStyle(color: Colors.grey.shade600)),
+              trailing: Text(
+                '৳${product.price.toStringAsFixed(2)}',
+                style: const TextStyle(color: Color(0xFFFF7A00), fontWeight: FontWeight.bold, fontSize: 16),
+              ),
               onTap: () {
                 Navigator.push(
                   context,
@@ -90,10 +116,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
 
   Future<void> _loadWishlistState() async {
     final user = FirebaseAuth.instance.currentUser;
-
-    if (user == null) {
-      return;
-    }
+    if (user == null) return;
 
     final snapshot = await FirebaseFirestore.instance
         .collection('wishlist')
@@ -102,10 +125,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
         .doc(widget.product.id)
         .get();
 
-    if (!mounted) {
-      return;
-    }
-
+    if (!mounted) return;
     setState(() {
       isWishlisted = snapshot.exists;
     });
@@ -113,13 +133,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
 
   Future<void> _toggleWishlist() async {
     final user = FirebaseAuth.instance.currentUser;
-
-    if (user == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please log in to use the wishlist.')),
-      );
-      return;
-    }
+    if (user == null) return;
 
     final docRef = FirebaseFirestore.instance
         .collection('wishlist')
@@ -139,10 +153,7 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
       });
     }
 
-    if (!mounted) {
-      return;
-    }
-
+    if (!mounted) return;
     setState(() {
       isWishlisted = !isWishlisted;
     });
@@ -174,14 +185,19 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
     const accentColor = Color(0xFFFF7A00);
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF7F7F7),
       appBar: AppBar(
-        title: const Text('Product Details'),
+        title: const Text('Product Details', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: accentColor,
+        elevation: 0,
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
             onPressed: _toggleWishlist,
             icon: Icon(
               isWishlisted ? Icons.favorite : Icons.favorite_border,
-              color: accentColor,
+              color: Colors.white,
             ),
           ),
         ],
@@ -190,121 +206,112 @@ class _ProductDescriptionPageState extends State<ProductDescriptionPage> {
         padding: const EdgeInsets.all(16),
         children: [
           Container(
-            height: 220,
+            height: 250,
             decoration: BoxDecoration(
-              color: Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(12),
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4))
+              ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.asset(
-                widget.product.imageAsset,
-                fit: BoxFit.cover,
-              ),
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(widget.product.imageAsset, fit: BoxFit.cover),
             ),
           ),
-          const SizedBox(height: 16),
-          Text(
-            widget.product.name,
-            style: const TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          const SizedBox(height: 24),
+          Text(widget.product.name, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF2A324B))),
           const SizedBox(height: 8),
           Text(
             'Price: ৳${widget.product.price.toStringAsFixed(2)}',
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: accentColor,
-            ),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: accentColor),
           ),
-          const SizedBox(height: 16),
-          const Text(
-            'Description',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          const SizedBox(height: 24),
+          const Text('Description', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           Text(
             widget.product.description,
-            style: const TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 15, color: Colors.grey.shade700, height: 1.5),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 24),
+          // --- Quantity Portion Re-added ---
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Quantity',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              const Text('Quantity', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               Row(
                 children: [
                   IconButton(
-                    onPressed: quantity > 1
-                        ? () {
-                            setState(() {
-                              quantity--;
-                            });
-                          }
-                        : null,
-                    icon: const Icon(Icons.remove),
+                    icon: const Icon(Icons.remove_circle_outline, size: 30),
+                    onPressed: quantity > 1 ? () => setState(() => quantity--) : null,
                     color: accentColor,
                   ),
-                  Text(
-                    '$quantity',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  const SizedBox(width: 8),
+                  Text('$quantity', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  const SizedBox(width: 8),
                   IconButton(
-                    onPressed: () {
-                      setState(() {
-                        quantity++;
-                      });
-                    },
-                    icon: const Icon(Icons.add),
+                    icon: const Icon(Icons.add_circle_outline, size: 30),
+                    onPressed: () => setState(() => quantity++),
                     color: accentColor,
                   ),
                 ],
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          Text(
-            'Total Price: ৳${totalPrice.toStringAsFixed(2)}',
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: accentColor,
+          const SizedBox(height: 150), 
+        ],
+      ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              boxShadow: [
+                BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, -2))
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Total Price:', style: TextStyle(fontSize: 16, color: Colors.grey)),
+                    Text(
+                      '৳${totalPrice.toStringAsFixed(2)}',
+                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: accentColor,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      elevation: 0,
+                    ),
+                    onPressed: _addToCart,
+                    child: const Text(
+                      'Add to Cart',
+                      style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: _addToCart,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: accentColor,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-              ),
-              child: const Text(
-                'Add to Cart',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
+          // Navigation bar spacing adjusted to be lower
+          Container(
+            color: Colors.white,
+            child: CustomNavBar(selectedIndex: widget.navIndex),
           ),
         ],
       ),
-      bottomNavigationBar: CustomNavBar(selectedIndex: widget.navIndex),
     );
   }
 }
