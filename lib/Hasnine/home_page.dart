@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'navigation.dart';
 import 'product_description.dart';
 import 'products.dart';
@@ -39,12 +40,12 @@ class HomePage extends StatelessWidget {
                           .doc(FirebaseAuth.instance.currentUser?.uid)
                           .snapshots(),
                       builder: (context, snapshot) {
-                        String nameToShow = "Guest";
+                        String nameToShow = 'Guest';
 
                         if (snapshot.hasData && snapshot.data!.exists) {
-                          var userData =
+                          final userData =
                               snapshot.data!.data() as Map<String, dynamic>;
-                          nameToShow = userData['name'] ?? "Guest";
+                          nameToShow = userData['name'] ?? 'Guest';
                         }
 
                         return Text(
@@ -53,8 +54,8 @@ class HomePage extends StatelessWidget {
                             fontSize: 18,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                      ),
-                    );
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -68,9 +69,9 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) {
-                        return const SearchPage(navIndex: 0,);
-                      }
+                    builder: (context) {
+                      return const SearchPage(navIndex: 0);
+                    },
                   ),
                 );
               },
@@ -89,13 +90,14 @@ class HomePage extends StatelessWidget {
                       'Search Product...',
                       style: TextStyle(
                         fontSize: 18,
-                        color: Colors.black, fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
                 ),
-                ),
               ),
+            ),
             const SizedBox(height: 16),
             const Text(
               'Popular Items',
@@ -125,7 +127,6 @@ class HomePage extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
@@ -145,38 +146,56 @@ class HomePage extends StatelessWidget {
                             height: 115,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(16),
+                                topRight: Radius.circular(16),
+                              ),
                             ),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: productPhotoOrIcon(product, iconSize: 30),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(16),
+                                topRight: Radius.circular(16),
+                              ),
+                              child: Image.asset(
+                                product.imageAsset,
+                                width: double.infinity,
+                                height: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                          const SizedBox(height: 10),
-                          Text(
-                            product.name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            product.category,
-                            style: TextStyle(
-                              color: Colors.grey.shade600,
-                              fontSize: 12,
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            '৳${product.price}',
-                            style: const TextStyle(
-                              color: Color(0xFFEF5350),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 10, 8, 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  product.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  product.category,
+                                  style: TextStyle(
+                                    color: Colors.grey.shade600,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  '৳${product.price}',
+                                  style: const TextStyle(
+                                    color: Color(0xFFEF5350),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -202,7 +221,7 @@ class _ProfileBox extends StatelessWidget {
       width: 42,
       height: 42,
       decoration: BoxDecoration(
-        color: Colors.grey,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
       ),
       child: const Icon(
