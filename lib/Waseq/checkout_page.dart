@@ -49,7 +49,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             Center(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5FA4AE),
+                  backgroundColor: const Color(0xFFFF7A00),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -77,7 +77,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Checkout')),
+      appBar: AppBar(title: const Text('Checkout', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                     backgroundColor: const Color(0xFFFF7A00),
+        iconTheme: const IconThemeData(color: Colors.white),
+        centerTitle: true,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -95,7 +100,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0xFF5FA4AE)),
+                borderSide: const BorderSide(color: Color(0xFFFF7A00)),
               ),
             ),
           ),
@@ -117,7 +122,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   title: const Text('Cash on Delivery'),
                   value: 'Cash on Delivery',
                   groupValue: selectedPaymentMethod,
-                  activeColor: const Color(0xFF5FA4AE),
+                  activeColor: const Color(0xFFFF7A00),
                   onChanged: (value) {
                     setState(() {
                       selectedPaymentMethod = value!;
@@ -129,7 +134,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   title: const Text('Credit/Debit Card'),
                   value: 'Card',
                   groupValue: selectedPaymentMethod,
-                  activeColor: const Color(0xFF5FA4AE),
+                  activeColor: const Color(0xFFFF7A00),
                   onChanged: (value) {
                     setState(() {
                       selectedPaymentMethod = value!;
@@ -141,7 +146,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   title: const Text('Mobile Banking (bKash/Nagad)'),
                   value: 'Mobile Banking',
                   groupValue: selectedPaymentMethod,
-                  activeColor: const Color(0xFF5FA4AE),
+                  activeColor: const Color(0xFFFF7A00),
                   onChanged: (value) {
                     setState(() {
                       selectedPaymentMethod = value!;
@@ -184,7 +189,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           height: 50,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF5FA4AE),
+              backgroundColor: const Color(0xFFFF7A00),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
