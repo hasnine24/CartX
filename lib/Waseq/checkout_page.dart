@@ -82,7 +82,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         iconTheme: const IconThemeData(color: Colors.white),
         centerTitle: true,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

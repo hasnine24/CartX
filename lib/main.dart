@@ -9,16 +9,21 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Future<void>? firebaseInitialization;
 
-  Future<FirebaseApp> _initializeFirebase() {
-    return Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  }
+  const MyApp({
+    super.key,
+    this.firebaseInitialization,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final firebaseFuture =
+        firebaseInitialization ??
+        Firebase.initializeApp(
+          options: DefaultFirebaseOptions.currentPlatform,
+        ).then((_) {});
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CartX',
@@ -26,8 +31,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: FutureBuilder<FirebaseApp>(
-        future: _initializeFirebase(),
+      home: FutureBuilder<void>(
+        future: firebaseFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const _FirebaseLoadingScreen();
