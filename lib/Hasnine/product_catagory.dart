@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'navigation.dart';
 import 'product_description.dart';
 import 'products.dart';
@@ -46,9 +45,15 @@ class ProductCatagoryPage extends StatelessWidget {
     ];
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        title: const Text('Product Category'),
+        title: const Text("Product Category",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: const Color(0xFFFF7A00),
+        iconTheme: const IconThemeData(color: Colors.white),
         centerTitle: true,
+        elevation: 0,
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
