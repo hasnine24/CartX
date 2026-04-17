@@ -74,7 +74,6 @@ class _SearchPageState extends State<SearchPage> {
                     child: ListTile(
                       title: Text(product.name),
                       subtitle: Text(product.category),
-                      trailing: Text('\$${product.price.toStringAsFixed(2)}'),
                       onTap: () {
                         Navigator.push(
                           context,
